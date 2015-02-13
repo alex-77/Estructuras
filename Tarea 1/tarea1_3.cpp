@@ -18,10 +18,10 @@ int robot(int x,int y,int n,int m){
     }else{
         int sum=0;
         if(x<n-3){
-            sum += Ejercicio3(x+3,y,n,m);
+            sum += robot(x+3,y,n,m);
         }
         if(y<m-2){
-            sum += Ejercicio3(x,y+2,n,m);
+            sum += robot(x,y+2,n,m);
         }
         return sum;
     }
