@@ -1,38 +1,68 @@
-#include"BusquedaGenerica.h"
-#include <iostream>
-#include<cstdlib>
-template<typename T>
-void imprimeArreglo(T[], int);
+#include<iostream>
+#include "Automovil.h"
+using namespace std;
 
-int main(){
-	const int tam = 10;
-	int enteros[tam];
-	int valor;
+int main()
+{
+    Automovil autos[20];
+    int numAutos = 3;
+    for (int i = 0; i < numAutos; i++)
+        autos[i].setPlaca(i+"");
+
+    autos[0].agregarServicio(100,"");
+    autos[0].agregarServicio(200,"");
+    autos[0].agregarServicio(300,"");
+    autos[1].agregarServicio(150,"");
+    autos[2].agregarServicio(1500,"");
+    autos[2].agregarServicio(150,"");
+    autos[2].agregarServicio(150,"");
+    autos[2].agregarServicio(150,"");
+
+   // autos[0].visualizarServicios();
 
 
-	for (int i = 0; i < tam; i++){
-		enteros[i] = rand() % 100;
-	}
-	imprimeArreglo<int>(enteros, tam);
+    int maxNum = 0;
+    int maxInv = 0;
 
-	std::cout << "Entre el elemento a buscar: ";
-	std::cin >> valor;
 
-	bool existe= BusquedaGenerica<int>::busquedaSecuencial(enteros,valor,tam);
-	if (existe){
-		std::cout << "El valor si existe en el arreglo" << std::endl;
-	}
-	else{
-		std::cout << "El valor no existe en el arreglo"<<std::endl;
-	}
+    cout << "HISTOGRAMA" << endl;
 
-	return 0;
-}
-template<typename T>
-void imprimeArreglo(T a[], int tam){
+    for (int i = 0; i < numAutos; i++){
+        if (i == 0)
+        {
+            maxNum = autos[i].getNumServicios();
+            maxInv = autos[i].getMontoServicios();
+        }
 
-	for (int i = 0; i < tam; i++){
-		std::cout << a[i]<<" ";
-	}
-	std::cout << std::endl;
+        if (autos[i].getNumServicios() > maxNum)
+            maxNum = autos[i].getNumServicios();
+
+        if (autos[i].getMontoServicios() > maxInv)
+            maxInv = autos[i].getMontoServicios();
+
+
+        for (int j = 0; j < autos[i].getNumServicios(); j++){
+            cout << "*";
+        }
+        cout << endl;
+    }
+
+    cout << "MAXIMO NUMERO SERVICIOS: " << maxNum << endl;
+    cout << "MAXIMA INVERSION: " << "$ " << maxInv << endl;
+
+
+    /*
+    for (int i = 0; i < numAutos; i++)
+        cout << autos[i].getPlaca() << " ";
+
+    string autoBuscado;
+    cout << "Auto a buscar: ";
+    cin >> autoBuscado;
+
+    for (int i = 0; i < numAutos; i++)
+        if (autos[i].getPlaca() == autoBuscado)
+            cout << i;
+    */
+
+    return 0;
 }
